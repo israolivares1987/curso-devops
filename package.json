@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "test": "jest",
-     "build": "no se"
+    "build": "npm run build"
   },
   "engines": {
     "node": ">=22.0.0"
