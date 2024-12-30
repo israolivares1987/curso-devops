@@ -12,24 +12,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'  # O la versión de Python que prefieras
-
-      - name: Install dependencies
-        run: cd ./snyk/python && npm install
+          python-version: '3.8'  # o la versión que uses en tu proyecto
 
       - name: Install dependencies
         run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r ./snyk/python/requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Monitor and Test
-        uses: snyk/actions/python-3.10@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --all-projects --directory=./snyk/python
+      - name: Install Snyk CLI
+        run: |
+          curl -sL https://github.com/snyk/snyk/releases/download/v1.842.0/snyk-linux-x64-1.842.0.tar.gz | tar xz
+          sudo mv snyk /usr/local/bin
+
+      - name: Run Snyk test
+        run: snyk test --all-projects
 
 
   snyk-scan-node:
