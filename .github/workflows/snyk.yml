@@ -20,7 +20,11 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r ./snyk/python/requirements.txt
-          pip install snyk
+
+      - name: Monitor and Test
+        uses: snyk/actions/setup@v1
+        with:
+          snyk-token: ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk to check for vulnerabilities
         run: cd ./snyk/python && snyk test
