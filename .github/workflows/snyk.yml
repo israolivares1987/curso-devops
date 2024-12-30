@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r ./snyk/python/requirements.txt
 
       - name: Install Snyk CLI
         run: |
@@ -25,7 +25,7 @@ jobs:
           sudo mv snyk /usr/local/bin
 
       - name: Run Snyk test
-        run: snyk test --all-projects
+        run: cd ./snyk/python && snyk test --all-projects
 
 
   snyk-scan-node:
