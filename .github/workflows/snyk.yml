@@ -15,6 +15,9 @@ jobs:
           python-version: '3.10'  # O la versión de Python que prefieras
 
       - name: Install dependencies
+        run: cd ./snyk/python && npm install
+
+      - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
