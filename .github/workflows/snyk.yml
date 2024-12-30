@@ -26,8 +26,10 @@ jobs:
 
       - name: Monitor and Test
         uses: snyk/actions/python-3.10@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          snyk-token: ${{ secrets.SNYK_TOKEN }}
+          args: --all-projects --directory=./snyk/python
 
 
   snyk-scan-node:
