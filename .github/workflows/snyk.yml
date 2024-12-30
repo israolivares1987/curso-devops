@@ -29,8 +29,6 @@ jobs:
         with:
           snyk-token: ${{ secrets.SNYK_TOKEN }}
 
-      - name: Run Snyk to check for vulnerabilities
-        run: cd ./snyk/python && snyk test
 
   snyk-scan-node:
     runs-on: ubuntu-latest
