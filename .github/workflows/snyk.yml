@@ -22,7 +22,7 @@ jobs:
           pip install -r ./snyk/python/requirements.txt
 
       - name: Monitor and Test
-        uses: snyk/actions/setup@v1
+        uses: snyk/actions/python-3.10@master
         with:
           snyk-token: ${{ secrets.SNYK_TOKEN }}
 
