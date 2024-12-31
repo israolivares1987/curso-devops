@@ -1,0 +1,27 @@
+name: Snyk Scan
+on: [push, pull_request]
+jobs:
+  snyk-scan-python:
+    runs-on: ubuntu-latest
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install
+
+      - name: Docker Build
+        run: docker buil -t image-snyk
+
+      - name: Install Snyk CLI
+        run: |
+          npm install -g snyk
+
+      - name: Run Snyk test
+        run: snyk container test image-snyk
+
