@@ -1,10 +1,6 @@
 # Imagen base de Node.js 22
 FROM node:20-alpine
 
-# Crea un usuario no root
-RUN adduser -D myuser
-USER myuser
-
 # Configurar el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
