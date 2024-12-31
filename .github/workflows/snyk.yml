@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Snyk CLI
         run: |
-          curl -sL https://github.com/snyk/snyk/releases/download/v1.842.0/snyk-linux-x64-1.842.0.tar.gz | tar xz
+          curl -sL https://github.com/snyk/cli/archive/refs/tags/v1.1294.3.tar.gz | tar xz
           sudo mv snyk /usr/local/bin
 
       - name: Run Snyk test
