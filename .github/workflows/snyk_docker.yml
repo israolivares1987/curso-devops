@@ -16,7 +16,7 @@ jobs:
         run: npm install
 
       - name: Docker Build
-        run: docker buil -t image-snyk .
+        run: docker build -t image-snyk .
 
       - name: Install Snyk CLI
         run: |
