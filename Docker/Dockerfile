@@ -1,5 +1,5 @@
 # Imagen base de Node.js 22
-FROM node:22
+FROM node:22.12.0-bookworm-slim
 
 # Configurar el directorio de trabajo dentro del contenedor
 WORKDIR /app
