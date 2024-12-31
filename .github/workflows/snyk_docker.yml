@@ -1,4 +1,4 @@
-name: Snyk Scan
+name: Snyk Scan Docker
 on: [push, pull_request]
 jobs:
   snyk-scan-python:
@@ -16,7 +16,7 @@ jobs:
         run: npm install
 
       - name: Docker Build
-        run: docker buil -t image-snyk
+        run: docker buil -t image-snyk .
 
       - name: Install Snyk CLI
         run: |
