@@ -19,10 +19,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./snyk/python/requirements.txt
 
-      - name: Install Snyk CLI
+      - name: Install Snyk CLI (via apt)
         run: |
-          curl -sL https://github.com/snyk/cli/archive/refs/tags/v1.1294.3.tar.gz | tar xz
-          sudo mv snyk /usr/local/bin
+          sudo apt-get update
+          sudo apt-get install -y snyk
 
       - name: Run Snyk test
         run: cd ./snyk/python && snyk test --all-projects
