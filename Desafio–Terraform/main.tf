@@ -6,6 +6,7 @@ module "vpc" {
 
 # Módulo Subnet
 module "subnet" {
+  depends_on               = [module.vpc]
   count                    = length(var.subnet_cidr_block)
   source                   = "./modules/subnet"
   vpc_id                   = module.vpc.vpc_id
@@ -15,6 +16,7 @@ module "subnet" {
 
 #Modulo IGW
 module "igw" {
+  depends_on               = [module.subnet]
   source           = "./modules/igw"
   vpc_id           = module.vpc.vpc_id
   internet_gw_name = local.internet_gw_name
@@ -22,6 +24,7 @@ module "igw" {
 
 #Modulo Route
 module "route" {
+  depends_on               = [module.igw, module.subnet]
   source         = "./modules/route"
   vpc_id         = module.vpc.vpc_id
   internet_gw_id = module.igw.aws_internet_gateway_id
@@ -30,6 +33,7 @@ module "route" {
 
 #Module SG
 module "sg" {
+  depends_on               = [module.vpc]
   source = "./modules/sg"
   vpc_id = module.vpc.vpc_id
   ingress_rules = var.sg_config.ingress_rules
@@ -39,6 +43,7 @@ module "sg" {
 
 # Módulo EC2
 module "ec2" {
+  depends_on               = [module.vpc, module.subnet, module.sg]
   count         = length(var.subnet_cidr_block)
   source        = "./modules/ec2"
   ami_id        = "ami-0ca9fb66e076a6e32"

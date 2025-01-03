@@ -1,4 +1,5 @@
 data "aws_vpc" "vpc_pci" {
+  depends_on = [ module.vpc]
   cidr_block = var.vpc_cidr_block
 }
 
