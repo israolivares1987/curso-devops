@@ -1,0 +1,28 @@
+#SPDX-License-Identifier: MIT-0
+# tasks file for desafio-ansible
+---
+- name: Instalar Nginx (si no está presente)
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Crear archivo con variables
+  copy:
+    content: "El servidor se ejecuta en el puerto {{ server_port }}"
+    dest: /root/configuracion.txt
+
+- name: update and upgrade packages
+  shell: apt update && apt upgrade -y
+
+- name: install iproute2
+  shell: apt install iproute2 -y
+
+- name: Mostrar información del nodo
+  debug:
+    msg: "El nodo {{ ansible_host }} tiene IP {{ ansible_default_ipv4.address }}"
+
+- name: Crear archivo de configuración de Nginx desde template
+  template:
+    src: templates/pagina.html
+    dest: /root/pagina.html

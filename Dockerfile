@@ -1,18 +1,21 @@
-# Imagen base de Node.js 22
-FROM node:20-alpine
+# Usar una imagen base, por ejemplo, Ubuntu
+FROM ubuntu:20.04
 
-# Configurar el directorio de trabajo dentro del contenedor
-WORKDIR /app
+# Instalar servidor SSH
+RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get install python3 -y
 
-# Copiar el archivo package.json y realizar instalación de dependencias
-COPY package*.json ./
-RUN npm install
+# Crear directorio para el proceso SSH
+RUN mkdir /var/run/sshd
 
-# Copiar el resto del código al contenedor
-COPY . .
+# Permitir autenticación por contraseña (opcional, pero menos seguro)
+RUN echo 'root:12345678' | chpasswd
 
-# Exponer el puerto 3000
-EXPOSE 3000
+# Configurar SSH para permitir acceso remoto
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Comando para ejecutar la aplicación
-CMD ["npm", "start"]
+# Exponer el puerto SSH
+EXPOSE 22
+
+# Iniciar el servidor SSH
+CMD ["/usr/sbin/sshd", "-D"]

@@ -1,0 +1,5 @@
+---
+- name: Desafio Ansible
+  hosts: all
+  roles:
+    - desafio-ansible

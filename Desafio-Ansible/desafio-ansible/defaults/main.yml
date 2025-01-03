@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for desafio-ansible
+server_port: 80
+log_level: warn
+web_root: /var/www/html
+server_name: localhost
