@@ -8,7 +8,7 @@ resource "aws_instance" "example_instance" {
     Name = var.instance_name
   }
 
-  associate_public_ip_address = true
+  associate_public_ip_address = var.associate_public_ip_address
 
   security_groups = [var.sg_id]
 
